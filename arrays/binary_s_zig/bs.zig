@@ -169,4 +169,77 @@ pub fn main() !void {
     } else {
         std.debug.print("Result: Not found\n", .{});
     }
+
+    // h3 -- Validation Tests
+    // h4 -- Comprehensive testing of edge cases
+    std.debug.print("\n2. VALIDATION TESTS\n", .{});
+    std.debug.print("===================\n", .{});
+    validationTests();
+
+    // h3 -- Performance Tests
+    // h4 -- Measure performance with different array sizes
+    std.debug.print("\n\n3. PERFORMANCE TESTS\n", .{});
+    std.debug.print("===================\n", .{});
+    std.debug.print("Note: Testing 10,000 iterations per case\n", .{});
+    std.debug.print("      Array contains even numbers [0, 2, 4, ...]\n\n", .{});
+
+    // Get default allocator for dynamic memory
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    const allocator = gpa.allocator();
+    // Check for memory leaks
+    defer _ = gpa.deinit();
+
+    // Test with different array sizes
+    try performanceTest(allocator, 1000); // 1K elements
+    try performanceTest(allocator, 10000); // 10K elements
+    try performanceTest(allocator, 100000); // 100K elements
+    try performanceTest(allocator, 1000000); // 1M elements
+
+    // h3 -- Zig-Specific Features
+    // h4 -- Highlights Zig language features and design philosophy
+    std.debug.print("\n\n4. ZIG-SPECIFIC FEATURES\n", .{});
+    std.debug.print("=======================\n", .{});
+    std.debug.print("Language Features Used:\n", .{});
+    std.debug.print("  - Optional types (?usize): Safe nullable return values\n", .{});
+    std.debug.print("  - Manual memory management: Explicit allocators\n", .{});
+    std.debug.print("  - Defer: Automatic cleanup when scope exits\n", .{});
+    std.debug.print("  - Checked arithmetic: Prevents underflow in bounds\n", .{});
+    std.debug.print("  - Explicit casting: @as() and @intCast() for type safety\n", .{});
+
+    std.debug.print("\nZig Design Philosophy:\n", .{});
+    std.debug.print("  - No hidden memory allocations\n", .{});
+    std.debug.print("  - No garbage collector\n", .{});
+    std.debug.print("  - Compile-time execution and metaprogramming\n", .{});
+    std.debug.print("  - Explicit error handling\n", .{});
+    std.debug.print("  - C interoperability and predictable performance\n", .{});
+
+    // h3 -- Algorithm Analysis
+    // h4 -- Comprehensive algorithm analysis
+    std.debug.print("\n\n5. ALGORITHM ANALYSIS\n", .{});
+    std.debug.print("====================\n", .{});
+    std.debug.print("Complexity Analysis:\n", .{});
+    std.debug.print("  Time Complexity: O(log n)\n", .{});
+    std.debug.print("    - Each iteration halves the search space\n", .{});
+    std.debug.print("    - Extremely efficient for large datasets\n", .{});
+    std.debug.print("  Space Complexity: O(1)\n", .{});
+    std.debug.print("    - Iterative implementation uses constant space\n", .{});
+
+    std.debug.print("\nMathematical Insights:\n", .{});
+    std.debug.print("  Maximum comparisons: ⌊log₂n⌋ + 1\n", .{});
+    std.debug.print("  For 1M elements: ~20 comparisons needed\n", .{});
+    std.debug.print("  For 1B elements: ~30 comparisons needed\n", .{});
+    std.debug.print("  Doubling input size adds only 1 comparison\n", .{});
+
+    std.debug.print("\nPerformance Comparison:\n", .{});
+    std.debug.print("  Binary Search vs Linear Search:\n", .{});
+    std.debug.print("    - 1K elements: ~10 ops vs ~500 ops (50x faster)\n", .{});
+    std.debug.print("    - 1M elements: ~20 ops vs ~500K ops (25,000x faster)\n", .{});
+    std.debug.print("    - 1B elements: ~30 ops vs ~500M ops (16Mx faster)\n", .{});
+
+    std.debug.print("\nOptimal Use Cases in Zig:\n", .{});
+    std.debug.print("  ✓ Large sorted datasets (> 100 elements)\n", .{});
+    std.debug.print("  ✓ Embedded systems with memory constraints\n", .{});
+    std.debug.print("  ✓ Performance-critical applications\n", .{});
+    std.debug.print("  ✓ When you need predictable memory usage\n", .{});
+    std.debug.print("  ✓ Systems programming with manual memory management\n", .{});
 }
